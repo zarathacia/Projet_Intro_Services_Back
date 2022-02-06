@@ -2,6 +2,7 @@ package com.example.services.resource;
 
 import com.example.services.domain.Category;
 import com.example.services.domain.Product;
+import com.example.services.domain.Response;
 import com.example.services.service.implementation.CategoryServiceImp;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -38,10 +39,19 @@ public class CategoryResource {
         return ResponseEntity.created(uri).body(categoryService.saveCategory(category));
     }
 
-    @PostMapping("/product/save")
-    public ResponseEntity<Product> saveProduct(@RequestBody Product product){
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/product/save").toUriString());
-        return ResponseEntity.created(uri).body(categoryService.saveProduct(product));
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Response> deleteServer(@PathVariable("id" ) Long id)  {
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(of("deleted" , categoryService.deleteCategory(id)))
+                        .message("Server deleted")
+                        .status(OK)
+                        .statusCode(OK.value())
+                        .build()
+        );
+
     }
 
     @PostMapping("/product/addtocategory")

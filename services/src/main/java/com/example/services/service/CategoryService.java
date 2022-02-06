@@ -11,7 +11,6 @@ public interface CategoryService {
     Category saveCategory(Category category);
     List<Category> getCategories();
     Category getCategory(Long id);
-    Product saveProduct(Product product);
     void addProductToCategory(String category, String productName);
     Category updateCategory(Category server);
     Boolean deleteCategory(Long id);

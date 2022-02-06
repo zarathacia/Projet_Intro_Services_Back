@@ -42,12 +42,7 @@ public class CategoryServiceImp implements CategoryService {
         return categoryRepo.findById(id).get();
     }
 
-    @Override
-    public Product saveProduct(Product product) {
-            log.info("Saving new product {} to the database",product.getName());
-            return productRepo.save(product);
 
-    }
 
     @Override
     public void addProductToCategory(String categoryName, String productName) {
@@ -60,7 +55,8 @@ public class CategoryServiceImp implements CategoryService {
     @Override
     public Category updateCategory(Category category) {
         log.info("Updating category : {}", category.getCategory());
-        return categoryRepo.save(category);    }
+        return categoryRepo.save(category);
+    }
 
     @Override
     public Boolean deleteCategory(Long id) {
