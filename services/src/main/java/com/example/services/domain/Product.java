@@ -18,6 +18,8 @@ public class Product {
     private Long id;
     private String name;
     private String description;
+    @ManyToMany
+    private Collection<Category> categories = new ArrayList<>();
     private Long stock;
     private Double price;
     @OneToMany(fetch = FetchType.EAGER)

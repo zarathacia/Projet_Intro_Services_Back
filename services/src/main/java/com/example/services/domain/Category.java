@@ -16,6 +16,6 @@ public class Category {
     @GeneratedValue(strategy = AUTO)
     private Long id;
     private String category;
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Product> products = new ArrayList<>();
 }
