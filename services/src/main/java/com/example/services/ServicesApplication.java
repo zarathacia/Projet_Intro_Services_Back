@@ -20,7 +20,7 @@ public class ServicesApplication {
 		SpringApplication.run(ServicesApplication.class, args);
 	}
 
-	@Bean
+	/*@Bean
 	CommandLineRunner run(CategoryService categoryService, ProductService productService){
 		return args -> {
 			productService.saveProduct(new Product("Zitouna","mdjfjbdsfbdsb", new ArrayList<>(), 50L,10.0,new ArrayList<>()));
@@ -57,6 +57,6 @@ public class ServicesApplication {
 
 
 		};
-	}
+	}*/
 
 }

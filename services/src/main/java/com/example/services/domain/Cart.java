@@ -2,20 +2,19 @@ package com.example.services.domain;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
-import static javax.persistence.FetchType.*;
 import static javax.persistence.GenerationType.AUTO;
 
 @Entity
 @Data
-public class User {
+public class Cart {
     @Id
     @GeneratedValue(strategy = AUTO)
     private Long id;
-    private String firstname;
-    private String lastname;
-    private String phone;
     @OneToOne
     private Account account;
 }

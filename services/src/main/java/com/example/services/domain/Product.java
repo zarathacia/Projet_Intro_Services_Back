@@ -24,6 +24,8 @@ public class Product {
     private Double price;
     @OneToMany(fetch = FetchType.EAGER)
     private Collection<Image> images = new ArrayList<>();
+    @ManyToMany
+    private Collection<Supplier> suppliers = new ArrayList<>();
 
     public Product() {
     }

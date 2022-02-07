@@ -13,14 +13,9 @@ public class Image {
     @GeneratedValue(strategy = AUTO)
     private Long id;
     private String path;
-    /*@ManyToOne(fetch = FetchType.EAGER)
-    private Product product ;*/
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Product product ;
 
     public Image() {
-    }
-
-    public Image(String path) {
-        this.path = path;
-        //this.product = product;
     }
 }

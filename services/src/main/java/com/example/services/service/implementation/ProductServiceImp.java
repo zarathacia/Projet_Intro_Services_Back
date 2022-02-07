@@ -44,7 +44,7 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public Product getProduct(Long id) {
-        log.info("Fetching categories by {} ",id);
+        log.info("Fetching products by {} ",id);
         return productRepo.getById(id);
     }
 
@@ -59,7 +59,7 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public Product updateProduct(Product product) {
-        log.info("Updating category : {}", product.getName());
+        log.info("Updating product : {}", product.getName());
         return productRepo.save(product);
     }
 

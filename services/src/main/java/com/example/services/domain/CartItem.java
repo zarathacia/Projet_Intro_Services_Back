@@ -11,12 +11,13 @@ import static javax.persistence.GenerationType.AUTO;
 
 @Entity
 @Data
-public class Account {
+public class CartItem {
     @Id
     @GeneratedValue(strategy = AUTO)
     private Long id;
-    private String email;
-    private String username;
-    private String password;
-
+    private Long quantity;
+    @OneToOne
+    private Product product;
+    @OneToOne
+    private Cart cart;
 }
