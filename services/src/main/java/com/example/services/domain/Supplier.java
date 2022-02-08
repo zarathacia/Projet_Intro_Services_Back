@@ -5,21 +5,25 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 import static javax.persistence.GenerationType.AUTO;
 
 @Entity
 @Data
-public class Account {
+public class Supplier {
     @Id
     @GeneratedValue(strategy = AUTO)
     private Long id;
+    private String name;
     private String email;
-    private String username;
-    private String password;
-    private String imageUrl;
-    @OneToOne
-    private User user;
+    private String phoneNumber;
+    private String address;
+    @ManyToMany
+    private Collection<Product> products = new ArrayList<>();
+
 
 }

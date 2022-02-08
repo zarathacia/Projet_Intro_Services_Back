@@ -4,16 +4,18 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-import static javax.persistence.FetchType.*;
+import java.util.Date;
+
 import static javax.persistence.GenerationType.AUTO;
 
 @Entity
 @Data
-public class User {
+public class Order {
     @Id
     @GeneratedValue(strategy = AUTO)
-    private Long id;
-    private String firstname;
-    private String lastname;
-    private String phone;
+    private Long id ;
+    private Date date;
+    private Long total;
+
+
 }
