@@ -16,6 +16,4 @@ public class User {
     private String firstname;
     private String lastname;
     private String phone;
-    @OneToOne
-    private Account account;
 }

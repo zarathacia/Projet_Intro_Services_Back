@@ -16,9 +16,6 @@ public class Order {
     private Long id ;
     private Date date;
     private Long total;
-    @OneToOne
-    private Account account;
-    @OneToOne(fetch = FetchType.EAGER)
-    private Cart cart ;
+
 
 }

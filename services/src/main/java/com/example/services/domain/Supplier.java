@@ -5,6 +5,10 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 import static javax.persistence.GenerationType.AUTO;
 
@@ -18,6 +22,8 @@ public class Supplier {
     private String email;
     private String phoneNumber;
     private String address;
+    @ManyToMany
+    private Collection<Product> products = new ArrayList<>();
 
 
 }

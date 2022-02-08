@@ -15,7 +15,4 @@ public class Image {
     private String path;
     @ManyToOne(fetch = FetchType.EAGER)
     private Product product ;
-
-    public Image() {
-    }
 }
