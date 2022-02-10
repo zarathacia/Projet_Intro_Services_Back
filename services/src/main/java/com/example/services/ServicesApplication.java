@@ -20,10 +20,10 @@ public class ServicesApplication {
 		SpringApplication.run(ServicesApplication.class, args);
 	}
 
-	/*@Bean
+	@Bean
 	CommandLineRunner run(CategoryService categoryService, ProductService productService){
 		return args -> {
-			productService.saveProduct(new Product("Zitouna","mdjfjbdsfbdsb", new ArrayList<>(), 50L,10.0,new ArrayList<>()));
+			/*productService.saveProduct(new Product("Zitouna","mdjfjbdsfbdsb", new ArrayList<>(), 50L,10.0,new ArrayList<>()));
 			productService.saveProduct(new Product("sfarjel","mdjfjbdsfbdsb",new ArrayList<>(),100L,10.0,new ArrayList<>()));
 			productService.saveProduct(new Product("sfeneriya","mdjfjbdsfbdsb",new ArrayList<>(),200L,10.0,new ArrayList<>()));
 			productService.saveProduct(new Product("bourdgen","mdjfjbdsfbdsb",new ArrayList<>(),150L,10.0,new ArrayList<>()));
@@ -31,7 +31,7 @@ public class ServicesApplication {
 			productService.saveImage(new Image("hhhhh"));
 			productService.saveImage(new Image("ggggg"));
 			productService.saveImage(new Image("fffff"));
-			productService.saveImage(new Image("rrrrr"));
+			productService.saveImage(new Image("rrrrr"));*/
 
 
 			categoryService.saveCategory(new Category("arbre", new ArrayList<>()));
@@ -39,7 +39,7 @@ public class ServicesApplication {
 			categoryService.saveCategory(new Category("terre", new ArrayList<>()));
 			categoryService.saveCategory(new Category("marin", new ArrayList<>()));
 
-			categoryService.addProductToCategory("arbre", "Zitouna");
+			/*categoryService.addProductToCategory("arbre", "Zitouna");
 			categoryService.addProductToCategory("plante", "Zitouna");
 			categoryService.addProductToCategory("plante", "sfarjel");
 			categoryService.addProductToCategory("plante", "sfeneriya");
@@ -49,7 +49,7 @@ public class ServicesApplication {
 			productService.addImageToProduct("hhhhh","Zitouna");
 			productService.addImageToProduct("ggggg","Zitouna");
 			productService.addImageToProduct("rrrrr","sfarjel");
-			productService.addImageToProduct("rrrrr","bourdgen");
+			productService.addImageToProduct("rrrrr","bourdgen");*/
 
 
 
@@ -57,6 +57,6 @@ public class ServicesApplication {
 
 
 		};
-	}*/
+	}
 
 }
