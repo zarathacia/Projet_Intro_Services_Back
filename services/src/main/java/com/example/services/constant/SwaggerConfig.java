@@ -7,7 +7,7 @@ public class SwaggerConfig {
     public static final String CONTACT_EMAIL = "email@outlook.com";
     public static final String CONTACT_URL = "https://www.agricolys.com";
     public static final String CONTACT_NAME = "Agricolys API Support";
-    public static final String API_TITLE = "Invoice Management open API";
+    public static final String API_TITLE = "Agricolys Management open API";
     public static final String API_DESCRIPTION = "In the description property, in addition to describing your " +
             "overall API, you might want to provide some basic instructions to users on how to use Swagger UI. " +
             "If there’s a test account they should use, you can provide the information they need in this space. " +
