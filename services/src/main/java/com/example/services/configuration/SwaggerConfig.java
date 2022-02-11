@@ -31,7 +31,7 @@ public class SwaggerConfig {
                 .select().apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
                 .paths(PathSelectors.regex(SECURE_PATH))
                 .build()
-                .tags(new Tag(API_TAG, "All APIs relating to Agricolys"));
+                .tags(new Tag(API_TAG1,"All APIs relating to Agricolys"), new Tag(API_TAG2,"All APIs relating to Agricolys"));
     }
 
     private ApiInfo apiInfo() {
