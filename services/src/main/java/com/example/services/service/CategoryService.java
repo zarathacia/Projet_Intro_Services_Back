@@ -1,10 +1,7 @@
 package com.example.services.service;
 
-import com.example.services.domain.Category;
-import com.example.services.domain.Product;
+import com.example.services.model.Category;
 
-import java.io.IOException;
-import java.util.Collection;
 import java.util.List;
 
 public interface CategoryService {

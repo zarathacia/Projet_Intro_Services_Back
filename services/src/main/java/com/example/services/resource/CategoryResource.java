@@ -1,8 +1,7 @@
 package com.example.services.resource;
 
-import com.example.services.domain.Category;
-import com.example.services.domain.Product;
-import com.example.services.domain.Response;
+import com.example.services.model.Category;
+import com.example.services.model.Response;
 import com.example.services.service.implementation.CategoryServiceImp;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

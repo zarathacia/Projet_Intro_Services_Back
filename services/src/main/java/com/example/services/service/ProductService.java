@@ -1,7 +1,7 @@
 package com.example.services.service;
 
-import com.example.services.domain.Image;
-import com.example.services.domain.Product;
+import com.example.services.model.Image;
+import com.example.services.model.Product;
 
 import java.util.List;
 

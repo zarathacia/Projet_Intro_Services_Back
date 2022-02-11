@@ -1,10 +1,9 @@
 package com.example.services.service.implementation;
 
-import com.example.services.domain.Category;
-import com.example.services.domain.Image;
-import com.example.services.domain.Product;
-import com.example.services.repo.ImageRepo;
-import com.example.services.repo.ProductRepo;
+import com.example.services.model.Image;
+import com.example.services.model.Product;
+import com.example.services.repository.ImageRepo;
+import com.example.services.repository.ProductRepo;
 import com.example.services.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
