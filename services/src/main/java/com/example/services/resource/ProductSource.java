@@ -1,7 +1,6 @@
 package com.example.services.resource;
 
 import com.example.services.constant.SwaggerConfig;
-import com.example.services.model.Category;
 import com.example.services.model.Image;
 import com.example.services.model.Product;
 import com.example.services.model.Response;
@@ -47,9 +46,9 @@ public class ProductSource {
 
 
 
-    @ApiOperation(value = "Add a new category", notes = "Add a new information into the system", response = Category.class)
+    @ApiOperation(value = "Add a new product", notes = "Add a new information into the system", response = Product.class)
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "The category saved Successfully"),
+            @ApiResponse(responseCode = "200", description = "The product saved Successfully"),
             @ApiResponse(responseCode = "500", description = "Successfully retrieved list"),
             @ApiResponse(responseCode = "400", description = "The request is malformed or invalid"),
             @ApiResponse(responseCode = "404", description = "The resource URL was not found on the server"),
@@ -57,7 +56,7 @@ public class ProductSource {
             @ApiResponse(responseCode = "401", description = "You don't have permission to this resource")
     })
     @PostMapping("/save")
-    public ResponseEntity<Product> saveProduct(@RequestBody Product product){
+    public ResponseEntity<Product> saveProduct(@ApiParam(value = "Product to be saved", required = true) @RequestBody Product product){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/1/product/save").toUriString());
         return ResponseEntity.created(uri).body(productService.saveProduct(product));
     }
@@ -69,7 +68,7 @@ public class ProductSource {
     }
 
     @ApiOperation(value = "Find a product by its id", notes = "Retrieve a product by passing the product id", response = Product.class)
-    @ApiResponses({@ApiResponse(responseCode = "200", description = "The product was retrived successfully"),
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "The product was retired successfully"),
             @ApiResponse(responseCode = "400", description = "The request is malformed or invalid"),
             @ApiResponse(responseCode = "404", description = "The resource URL was not found on the server"),
             @ApiResponse(responseCode = "500", description = "An internal server error occurred"),
@@ -82,9 +81,16 @@ public class ProductSource {
     }
 
 
-
+    @ApiOperation(value = "Delete a product by its id", notes = "Delete a product by passing in the product id")
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "The product was deleted successfully"),
+            @ApiResponse(responseCode = "400", description = "The request is malformed or invalid"),
+            @ApiResponse(responseCode = "404", description = "The resource URL was not found on the server"),
+            @ApiResponse(responseCode = "500", description = "An internal server error occurred"),
+            @ApiResponse(responseCode = "403", description = "You are not authorized. Please authenticate and try again"),
+            @ApiResponse(responseCode = "401", description = "You don't have permission to this resource")
+    })
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Response> deleteProduct(@PathVariable("id" ) Long id)  {
+    public ResponseEntity<Response> deleteProduct(@ApiParam(value = "product id")@PathVariable("id" ) Long id)  {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
@@ -97,7 +103,21 @@ public class ProductSource {
 
     }
 
-    @PostMapping("/product/addtoproduct")
+    @ApiOperation(value = "Update an existing product", notes = "Update a product by passing in the product information with an existing product id", response = Product.class)
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "The category was updated successfully"),
+            @ApiResponse(responseCode = "400", description = "The request is malformed or invalid"),
+            @ApiResponse(responseCode = "404", description = "The resource URL was not found on the server"),
+            @ApiResponse(responseCode = "500", description = "An internal server error occurred"),
+            @ApiResponse(responseCode = "403", description = "You are not authorized. Please authenticate and try again"),
+            @ApiResponse(responseCode = "401", description = "You don't have permission to this resource")
+    })
+    @PutMapping("/update")
+    public ResponseEntity<Product> updateInvoice(@ApiParam(value = "product object in Json format")@RequestBody Product product) {
+        Product updatedProduct = productService.updateProduct(product);
+        return ResponseEntity.ok().body(updatedProduct);
+    }
+
+    @PostMapping("/image/addtoproduct")
     public ResponseEntity<?> addImageToProduct(@RequestBody ImageToCategory form){
         productService.addImageToProduct(form.getPath(), form.getProductName());
         return ResponseEntity.ok().build();
