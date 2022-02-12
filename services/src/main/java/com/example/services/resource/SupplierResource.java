@@ -1,7 +1,6 @@
 package com.example.services.resource;
 
 import com.example.services.constant.SwaggerConfig;
-
 import com.example.services.model.Response;
 import com.example.services.model.Supplier;
 import com.example.services.service.implementation.SupplierServiceImp;
@@ -17,11 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
-
-import static java.time.LocalDateTime.now;
-import static java.util.Map.of;
-import static org.springframework.http.HttpStatus.OK;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -88,14 +82,8 @@ public class SupplierResource {final private SupplierServiceImp supplierService;
         })
         @DeleteMapping("/supplier/delete/{id}")
         public ResponseEntity<Response> deleteSupplier(@ApiParam(value = "supplier id") @PathVariable("id") Long id) {
-            return ResponseEntity.ok(
-                    Response.builder()
-                            .timeStamp(now())
-                            .data(of("deleted", supplierService.deleteSupplier(id)))
-                            .message("Supplier deleted")
-                            .status(OK)
-                            .statusCode(OK.value())
-                            .build());
+            supplierService.deleteSupplier(id);
+            return ResponseEntity.ok().build();
 
         }
     

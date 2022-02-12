@@ -18,10 +18,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-import static java.time.LocalDateTime.now;
-import static java.util.Map.of;
-import static org.springframework.http.HttpStatus.OK;
-
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -98,15 +94,8 @@ public class CategoryResource {
     })
     @DeleteMapping("/category/delete/{id}")
     public ResponseEntity<Response> deleteCategory(@ApiParam(value = "category id")@PathVariable("id" ) Long id)  {
-        return ResponseEntity.ok(
-                Response.builder()
-                        .timeStamp(now())
-                        .data(of("deleted" , categoryService.deleteCategory(id)))
-                        .message("Category deleted")
-                        .status(OK)
-                        .statusCode(OK.value())
-                        .build()
-        );
+        categoryService.deleteCategory(id);
+        return ResponseEntity.ok().build();
 
     }
 

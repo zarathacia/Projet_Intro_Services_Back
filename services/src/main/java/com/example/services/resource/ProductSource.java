@@ -19,10 +19,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-import static java.time.LocalDateTime.now;
-import static java.util.Map.of;
-import static org.springframework.http.HttpStatus.OK;
-
 @RestController
 @RequestMapping("/api/product")
 @RequiredArgsConstructor
@@ -91,15 +87,8 @@ public class ProductSource {
     })
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Response> deleteProduct(@ApiParam(value = "product id")@PathVariable("id" ) Long id)  {
-        return ResponseEntity.ok(
-                Response.builder()
-                        .timeStamp(now())
-                        .data(of("deleted" , productService.deleteProduct(id)))
-                        .message("Product deleted")
-                        .status(OK)
-                        .statusCode(OK.value())
-                        .build()
-        );
+        productService.deleteProduct(id);
+        return ResponseEntity.ok().build();
 
     }
 

@@ -1,4 +1,4 @@
-package com.example.services.configuration;
+package com.example.services.security.configuration;
 
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
