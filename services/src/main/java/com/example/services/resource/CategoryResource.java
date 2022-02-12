@@ -82,7 +82,7 @@ public class CategoryResource {
             @ApiResponse(responseCode = "403", description = "You are not authorized. Please authenticate and try again"),
             @ApiResponse(responseCode = "401", description = "You don't have permission to this resource")
     })
-    @PutMapping("/update")
+    @PutMapping("/category/update")
     public ResponseEntity<Category> updateInvoice(@ApiParam(value = "category object in Json format")@RequestBody Category category) {
         Category updatedCategory = categoryService.updateCategory(category);
         return ResponseEntity.ok().body(updatedCategory);
@@ -96,7 +96,7 @@ public class CategoryResource {
             @ApiResponse(responseCode = "403", description = "You are not authorized. Please authenticate and try again"),
             @ApiResponse(responseCode = "401", description = "You don't have permission to this resource")
     })
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/category/delete/{id}")
     public ResponseEntity<Response> deleteCategory(@ApiParam(value = "category id")@PathVariable("id" ) Long id)  {
         return ResponseEntity.ok(
                 Response.builder()
