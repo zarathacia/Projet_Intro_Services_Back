@@ -1,7 +1,7 @@
-package com.example.services.configuration;
+package com.example.services.security.configuration;
 
 import com.example.services.filter.AuthorizationFilter;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -11,21 +11,18 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
+@AllArgsConstructor
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final AuthorizationFilter authorizationFilter;
+
 
     private static final String[] PUBLIC_URLS = {
             "/v2/api-docs",
             "/swagger-resources/**",
             "/swagger-ui/**",
-            "/webjars/**"
+            "/webjars/**",
     };
-
-    @Autowired
-    public SecurityConfig(AuthorizationFilter authorizationFilter) {
-        this.authorizationFilter = authorizationFilter;
-    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -37,4 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class);
     }
+
+
 }

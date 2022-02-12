@@ -16,5 +16,5 @@ public class Cart {
     @GeneratedValue(strategy = AUTO)
     private Long id;
     @OneToOne
-    private Account account;
+    private User user;
 }
