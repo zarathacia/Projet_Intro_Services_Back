@@ -1,28 +1,33 @@
 package com.example.services.service.implementation;
 
+import static java.lang.Boolean.TRUE;
+
+import java.util.List;
+
+import javax.transaction.Transactional;
+
 import com.example.services.model.Category;
 import com.example.services.model.Product;
 import com.example.services.repository.CategoryRepo;
 import com.example.services.repository.ProductRepo;
 import com.example.services.service.CategoryService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.util.List;
-
-import static java.lang.Boolean.TRUE;
-import static org.springframework.data.domain.PageRequest.of;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
-@RequiredArgsConstructor
+
 @Transactional
 @Slf4j
 public class CategoryServiceImp implements CategoryService {
     final private CategoryRepo categoryRepo;
     final private ProductRepo productRepo;
 
+    public CategoryServiceImp(CategoryRepo categoryRepo, ProductRepo productRepo) {
+        this.categoryRepo = categoryRepo;
+        this.productRepo = productRepo;
+    }
 
     @Override
     public Category saveCategory(Category category) {
@@ -38,15 +43,14 @@ public class CategoryServiceImp implements CategoryService {
 
     @Override
     public Category getCategory(Long id) {
-        log.info("Fetching servers by id : {} ",id);
+
+        log.info("Fetching servers by id : {} ", id);
         return categoryRepo.findById(id).get();
     }
 
-
-
     @Override
     public void addProductToCategory(String categoryName, String productName) {
-        log.info("Adding product {} to category {}",productName, categoryName);
+        log.info("Adding product {} to category {}", productName, categoryName);
         Category category = categoryRepo.findByCategory(categoryName);
         Product product = productRepo.findByName(productName);
         category.getProducts().add(product);

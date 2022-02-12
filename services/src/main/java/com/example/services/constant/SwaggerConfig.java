@@ -8,7 +8,7 @@ public class SwaggerConfig {
     public static final String CONTACT_URL = "https://www.agricolys.com";
     public static final String CONTACT_NAME = "Agricolys API Support";
     public static final String API_TITLE = "Agricolys Management open API";
-    public static final String API_DESCRIPTION = "In the description property, in addition to describing your " +
+    public static final String API_DESCRIPTION = "In the description property, 5in addition to describing your " +
             "overall API, you might want to provide some basic instructions to users on how to use Swagger UI. " +
             "If there’s a test account they should use, you can provide the information they need in this space. " +
             "In the description property, in addition to describing your " +
@@ -24,4 +24,5 @@ public class SwaggerConfig {
     public static final String API_TAG1 = "Category Service";
     public static final String API_TAG2 = "Product Service";
 
+    public static final String API_TAG3 = "Supplier Service";
 }
