@@ -23,7 +23,9 @@ public class SwaggerConfig {
     public static final String API_TAG0 = "Agricolys Service";
     public static final String API_TAG1 = "Category Service";
     public static final String API_TAG2 = "Product Service";
-
     public static final String API_TAG3 = "Supplier Service";
     public static final String API_TAG4 = "Cart Service";
+    public static final String API_TAG5 = "User Service";
+
+
 }

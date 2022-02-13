@@ -33,7 +33,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RestController
 @RequestMapping(path = {"/", "/user"})
 @AllArgsConstructor
-@Api(tags = { SwaggerConfig.API_TAG4 })
+@Api(tags = { SwaggerConfig.API_TAG5 })
 public class UserResource extends ExceptionHandling {
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
