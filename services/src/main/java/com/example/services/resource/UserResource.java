@@ -1,5 +1,6 @@
-/*package com.example.services.resource;
+package com.example.services.resource;
 
+import com.example.services.constant.SwaggerConfig;
 import com.example.services.exception.ExceptionHandling;
 import com.example.services.exception.domain.EmailExistException;
 import com.example.services.exception.domain.EmailNotFoundException;
@@ -10,6 +11,7 @@ import com.example.services.model.User;
 import com.example.services.model.UserPrincipal;
 import com.example.services.service.UserService;
 import com.example.services.utility.JWTTokenProvider;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -31,6 +33,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RestController
 @RequestMapping(path = {"/", "/user"})
 @AllArgsConstructor
+@Api(tags = { SwaggerConfig.API_TAG4 })
 public class UserResource extends ExceptionHandling {
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
@@ -122,4 +125,3 @@ public class UserResource extends ExceptionHandling {
     }
 
 }
-*/
