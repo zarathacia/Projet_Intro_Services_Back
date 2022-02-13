@@ -2,10 +2,7 @@ package com.example.services.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import static javax.persistence.GenerationType.AUTO;
 
@@ -17,4 +14,6 @@ public class Cart {
     private Long id;
     @OneToOne
     private User user;
+    @OneToMany
+    private CartItem cartItem;
 }

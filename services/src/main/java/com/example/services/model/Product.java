@@ -1,8 +1,14 @@
 package com.example.services.model;
 
-import lombok.Data;
+
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
+import java.math.BigDecimal;
+import lombok.Data;
+
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,10 +23,12 @@ public class Product {
     private Long id;
     private String name;
     private String description;
+    @DecimalMin(value = "0.00", message = "*Price has to be non negative number")
+    private BigDecimal price;
     @ManyToMany
     private Collection<Category> categories = new ArrayList<>();
     private Long stock;
-    private Double price;
+
     @OneToMany(fetch = FetchType.EAGER)
     private Collection<Image> images = new ArrayList<>();
     @ManyToMany
@@ -29,12 +37,14 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, String description, Collection<Category> categories, Long stock, Double price, Collection<Image> images) {
+    public Product(String name, String description, Collection<Category> categories, Long stock, BigDecimal price, Collection<Image> images) {
         this.name = name;
         this.description = description;
         this.categories = categories;
         this.stock = stock;
-        this.price = price;
+
         this.images = images;
+
+        this.price = price;
     }
 }

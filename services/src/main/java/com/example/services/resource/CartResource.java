@@ -7,8 +7,10 @@ import com.example.services.repository.ProductRepo;
 import com.example.services.service.CartService;
 import com.example.services.service.ProductService;
 import com.example.services.service.implementation.ProductServiceImp;
+import com.example.services.service.implementation.CartServiceImp;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +21,12 @@ import java.util.Optional;
 
 import static com.sun.org.apache.xml.internal.serializer.Version.getProduct;
 
+
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
 @Api(tags = {SwaggerConfig.API_TAG4})
+
 public class CartResource {
 
     private final CartService cartService;
@@ -51,10 +55,8 @@ public class CartResource {
         return cart();
     }
 
-    private Optional<Product> getProduct(Long productId) {log.info("Fetching products by {} ",id);
-        ProductRepo productRepo;
-        return productRepo.getById(id);
-    }
+
+
 
     @GetMapping("/Cart/checkout")
     public ModelAndView checkout() {
@@ -65,4 +67,5 @@ public class CartResource {
         }
         return cart();
     }
-}*/
+}
+*/
