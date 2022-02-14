@@ -1,12 +1,10 @@
 package com.example.services.model;
 
 
-import org.hibernate.validator.constraints.Length;
+
 
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Min;
-import java.math.BigDecimal;
+
 import lombok.Data;
 
 
@@ -23,8 +21,8 @@ public class Product {
     private Long id;
     private String name;
     private String description;
-    @DecimalMin(value = "0.00", message = "*Price has to be non negative number")
-    private BigDecimal price;
+
+    private double price;
     @ManyToMany
     private Collection<Category> categories = new ArrayList<>();
     private Long stock;
@@ -37,7 +35,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, String description, Collection<Category> categories, Long stock, BigDecimal price, Collection<Image> images) {
+    public Product(String name, String description, Collection<Category> categories, Long stock, double price, Collection<Image> images) {
         this.name = name;
         this.description = description;
         this.categories = categories;
