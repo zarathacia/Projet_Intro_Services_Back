@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface UserService {
 
-    User register(String firstName, String lastName, String username, String email) throws EmailExistException, UsernameExistException, UserNotFoundException;
+    User register(String firstName, String lastName, String username, String email, String password) throws EmailExistException, UsernameExistException, UserNotFoundException;
 
     User addNewUser(String firstName, String lastName, String username, String email, String role, boolean isNonlocked, boolean isActive, MultipartFile profileImage) throws EmailExistException, UsernameExistException, UserNotFoundException, IOException;
 
