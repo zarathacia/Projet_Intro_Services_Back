@@ -1,4 +1,4 @@
-/*package com.example.services.resource;
+package com.example.services.resource;
 
 import com.example.services.constant.SwaggerConfig;
 import com.example.services.exception.NotEnoughProductsInStockException;
@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Optional;
 
-import static com.sun.org.apache.xml.internal.serializer.Version.getProduct;
 
 
 @RestController
@@ -33,7 +32,7 @@ public class CartResource {
 
     private final ProductServiceImp productService;
 
-    @GetMapping("/Cart")
+    /*@GetMapping("/Cart")
     public ModelAndView cart() {
         ModelAndView modelAndView = new ModelAndView("/Cart");
         modelAndView.addObject("products", cartService.getProductsInCart());
@@ -43,7 +42,7 @@ public class CartResource {
 
     @GetMapping("/Cart/addProduct/{productId}")
     public ModelAndView addProductToCart(@PathVariable("productId") Long productId) {
-        getProduct(productId).ifPresent(cartService::addProduct);
+        getProduct(productId).ifPresent(cartService::addProductToCart);
         return cart();
     }
 
@@ -66,6 +65,5 @@ public class CartResource {
             return cart().addObject("outOfStockMessage", e.getMessage());
         }
         return cart();
-    }
+    }*/
 }
-*/

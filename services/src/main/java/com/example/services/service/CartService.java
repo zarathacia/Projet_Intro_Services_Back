@@ -1,22 +1,33 @@
-/*package com.example.services.service;
+package com.example.services.service;
 
 import com.example.services.exception.NotEnoughProductsInStockException;
+import com.example.services.model.CartItem;
 import com.example.services.model.Product;
 
-import java.math.BigDecimal;
 import java.util.Map;
+import java.util.Optional;
 
 public interface CartService {
 
-    void addProduct(Product product);
 
-    void removeProduct(Product product);
+
+    void addProductToCart(Product product);
+
+
 
     Map<Product, Integer> getProductsInCart();
 
-    void checkout() throws NotEnoughProductsInStockException;
+    void removeCartItem(CartItem cartItem);
 
-    Product getProduct(Long id);
+    Map<Product, Integer> getCartItems();
 
-    BigDecimal getTotal();
-}*/
+    //void checkout() throws NotEnoughProductsInStockException;
+
+   Optional<CartItem> getCartItem(Long id);
+
+
+
+
+
+    //double getTotal();
+}

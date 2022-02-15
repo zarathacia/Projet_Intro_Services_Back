@@ -14,5 +14,8 @@ public class Cart {
     private Long id;
     @OneToOne
     private User user;
+    @ManyToOne
+    CartItem cartItem;
+
 
 }
