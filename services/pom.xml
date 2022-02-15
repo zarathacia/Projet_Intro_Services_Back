@@ -11,7 +11,7 @@
 	<artifactId>services</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>services</name>
-	<description>api services pour projet Agricolys</description>
+	<description>api services pour project Agricolys</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
