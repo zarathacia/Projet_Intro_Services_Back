@@ -41,9 +41,9 @@ public class UserResource extends ExceptionHandling {
 
 
     @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody User user) {
-        authenticate(user.getUsername(), user.getPassword());
-        User loginUser = userService.findUserByUsername(user.getUsername());
+    public ResponseEntity<User> login(@RequestBody String email, @RequestBody  String password) {
+        authenticate(email, password);
+        User loginUser = userService.findUserByFullName(email);
         UserPrincipal principal = new UserPrincipal(loginUser);
         HttpHeaders jwtHeader = getJwtHeader(principal);
         return ResponseEntity.ok().headers(jwtHeader).body(loginUser);
@@ -51,42 +51,37 @@ public class UserResource extends ExceptionHandling {
 
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody User user) throws UsernameExistException, EmailExistException, UserNotFoundException {
-        User newUser = userService.register(user.getFirstName(), user.getLastName(), user.getUsername(), user.getEmail(), user.getPassword());
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/find/" + newUser.getUsername()).toUriString());
+        User newUser = userService.register(user.getFullName(), user.getEmail(), user.getPassword());
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/find/" + newUser.getFullName()).toUriString());
         return ResponseEntity.created(uri).body(newUser);
     }
 
     @PostMapping("/add")
-    public ResponseEntity<User> addNewUser(@RequestParam("firstName") String firstName,
-                                           @RequestParam("lastName") String lastName,
-                                           @RequestParam("username") String username,
+    public ResponseEntity<User> addNewUser(@RequestParam("fullName") String fullName,
                                            @RequestParam("email") String email,
                                            @RequestParam("role") String role,
                                            @RequestParam("isActive") String isActive,
                                            @RequestParam("isNonLocked") String isNonLocked,
                                            @RequestParam(value = "profileImage", required = false) MultipartFile profileImage) throws UsernameExistException, EmailExistException, UserNotFoundException, IOException {
-        User newUser = userService.addNewUser(firstName, lastName, username, email, role, Boolean.parseBoolean(isNonLocked),
+        User newUser = userService.addNewUser(fullName,email, role, Boolean.parseBoolean(isNonLocked),
                 Boolean.parseBoolean(isActive), profileImage);
         return ResponseEntity.ok().body(newUser);
     }
 
     @PostMapping("/update")
-    public ResponseEntity<User> update(@RequestParam("currentUsername") String currentUsername,
-                                       @RequestParam("firstName") String firstName,
-                                       @RequestParam("lastName") String lastName,
-                                       @RequestParam("username") String username,
+    public ResponseEntity<User> update(@RequestParam("currentFullname") String currentFullname,
+                                       @RequestParam("newFullname") String newFullname,
                                        @RequestParam("email") String email,
                                        @RequestParam(value = "role", required = false) String role,
                                        @RequestParam("isActive") String isActive,
                                        @RequestParam("isNonLocked") String isNonLocked) throws UsernameExistException, EmailExistException, UserNotFoundException, IOException {
-        User newUser = userService.updateUser(currentUsername, firstName, lastName, username, email, role, Boolean.parseBoolean(isNonLocked),
-                Boolean.parseBoolean(isActive));
+        User newUser = userService.updateUser(currentFullname,newFullname,email, role, Boolean.parseBoolean(isNonLocked), Boolean.parseBoolean(isActive));
         return ResponseEntity.ok().body(newUser);
     }
 
-    @GetMapping("/find/{username}")
-    public ResponseEntity<User> getUser(@PathVariable("username")String username) {
-        User user = userService.findUserByUsername(username);
+    @GetMapping("/find/{fullname}")
+    public ResponseEntity<User> getUser(@PathVariable("fullname")String username) {
+        User user = userService.findUserByFullName(username);
         return ResponseEntity.ok().body(user);
     }
 

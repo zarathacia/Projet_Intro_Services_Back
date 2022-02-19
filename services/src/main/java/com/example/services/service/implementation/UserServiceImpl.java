@@ -46,32 +46,30 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepo.findUserByUsername(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepo.findUserByEmail(email);
         if (user == null) {
-            LOGGER.error(NO_USER_BY_USERNAME + username);
-            throw new UsernameNotFoundException(NO_USER_BY_USERNAME + username);
+            LOGGER.error(NO_USER_BY_EMAIL + email);
+            throw new UsernameNotFoundException(NO_USER_BY_EMAIL + email);
         } else {
             validateLoginAttempt(user);
             user.setLogInDateDisplay(user.getLastLoginDate());
             user.setLastLoginDate(new Date());
             userRepo.save(user);
             UserPrincipal userPrincipal = new UserPrincipal(user);
-            LOGGER.info(USER_FROM_USER_DETAILS_SERVICE + username);
+            LOGGER.info(USER_FROM_USER_DETAILS_SERVICE + email);
             return userPrincipal;
         }
 
     }
 
     @Override
-    public User register(String firstName, String lastName, String username, String email, String password)
+    public User register(String fullName, String email, String password)
             throws EmailExistException, UsernameExistException, UserNotFoundException {
-        validateNewUsernameAndEmail(EMPTY, username, email);
+        validateNewFullNameAndEmail(EMPTY, fullName, email);
         User user = new User();
         String encodedPassword = encodePassword(password);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setUsername(username);
+        user.setFullName(fullName);
         user.setEmail(email);
         user.setPassword(encodedPassword);
         user.setActive(true);
@@ -84,16 +82,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User addNewUser(String firstName, String lastName, String username, String email, String role,
+    public User addNewUser(String fullName, String email, String role,
                            boolean isNonlocked, boolean isActive, MultipartFile profileImage)
             throws EmailExistException, UsernameExistException, UserNotFoundException {
-        validateNewUsernameAndEmail(EMPTY, username, email);
+        validateNewFullNameAndEmail(EMPTY, fullName, email);
         User user = new User();
         String password = generatePassword();
         String encodedPassword = encodePassword(password);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setUsername(username);
+        user.setFullName(fullName);
         user.setEmail(email);
         user.setPassword(encodedPassword);
         user.setActive(isActive);
@@ -106,13 +102,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User updateUser(String currentUsername, String newFirstName, String newLastName, String newUsername,
+    public User updateUser(String currentFullname, String newFullname,
                            String newEmail, String role, boolean isNonlocked, boolean isActive)
             throws EmailExistException, UsernameExistException, UserNotFoundException {
-        User currentUser = validateNewUsernameAndEmail(currentUsername, newUsername, newEmail);
-        currentUser.setFirstName(newFirstName);
-        currentUser.setLastName(newLastName);
-        currentUser.setUsername(newUsername);
+        User currentUser = validateNewFullNameAndEmail(currentFullname, newFullname, newEmail);
+        currentUser.setFullName(newFullname);
         currentUser.setEmail(newEmail);
         currentUser.setActive(isActive);
         currentUser.setNotLocked(isNonlocked);
@@ -128,8 +122,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User findUserByUsername(String username) {
-        return userRepo.findUserByUsername(username);
+    public User findUserByFullName(String fullName) {
+        return userRepo.findUserByFullName(fullName);
     }
 
     @Override
@@ -138,8 +132,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void deleteUser(String username) throws IOException {
-        User user = userRepo.findUserByUsername(username);
+    public void deleteUser(String fullName) throws IOException {
+        User user = userRepo.findUserByFullName(fullName);
         userRepo.deleteById(user.getId());
     }
 
@@ -157,13 +151,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     private void validateLoginAttempt(User user) {
         if (user.isNotLocked()) {
-            if (loginAttemptService.hasExceededMaxAttempts(user.getUsername())) {
+            if (loginAttemptService.hasExceededMaxAttempts(user.getFullName())) {
                 user.setNotLocked(false);
             } else {
                 user.setNotLocked(true);
             }
         } else {
-            loginAttemptService.evictUserFromLoginAttemptCache(user.getUsername());
+            loginAttemptService.evictUserFromLoginAttemptCache(user.getFullName());
         }
     }
 
@@ -179,17 +173,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return Role.valueOf(role.toUpperCase());
     }
 
-    private User validateNewUsernameAndEmail(String currentUsername, String newUsername, String newEmail)
-            throws UserNotFoundException, UsernameExistException, EmailExistException{
-        User userByNewUsername = findUserByUsername(newUsername);
+    private User validateNewFullNameAndEmail(String currentFullName, String newFullName, String newEmail)
+            throws UserNotFoundException, UsernameExistException, EmailExistException {
+        User userByNewUsername = findUserByFullName(newFullName);
         User userByNewEmail = findUserByEmail(newEmail);
-        if (StringUtils.isNotBlank(currentUsername)) {
-            User currentUser = findUserByUsername(currentUsername);
+        if (StringUtils.isNotBlank(currentFullName)) {
+            User currentUser = findUserByFullName(currentFullName);
             if (currentUser == null) {
-                throw new UserNotFoundException(USER_NOT_FOUND + currentUsername);
+                throw new UserNotFoundException(USER_NOT_FOUND + currentFullName);
             }
             if (userByNewUsername != null && !currentUser.getId().equals(userByNewUsername.getId())) {
-                throw new UsernameExistException(USERNAME_EXISTS);
+                throw new UsernameExistException(FULLNAME_EXISTS);
             }
             if (userByNewEmail != null && !currentUser.getId().equals(userByNewEmail.getId())) {
                 throw new EmailExistException(EMAIL_EXISTS);
@@ -197,7 +191,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             return currentUser;
         } else {
             if (userByNewUsername != null) {
-                throw new UsernameExistException(USERNAME_EXISTS);
+                throw new UsernameExistException(FULLNAME_EXISTS);
             }
             if (userByNewEmail != null) {
                 throw new EmailExistException(EMAIL_EXISTS);
@@ -205,5 +199,4 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             return null;
         }
     }
-
 }
