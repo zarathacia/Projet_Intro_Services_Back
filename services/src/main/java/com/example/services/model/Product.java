@@ -1,13 +1,10 @@
 package com.example.services.model;
 
-
-
-
 import javax.persistence.*;
 
 import lombok.Data;
 
-
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -22,7 +19,7 @@ public class Product {
     private String name;
     private String description;
 
-    private double price;
+    private BigDecimal price;
     @ManyToMany
     private Collection<Category> categories = new ArrayList<>();
     private Long stock;
@@ -35,7 +32,8 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, String description, Collection<Category> categories, Long stock, double price, Collection<Image> images) {
+    public Product(String name, String description, Collection<Category> categories, Long stock, BigDecimal price,
+            Collection<Image> images) {
         this.name = name;
         this.description = description;
         this.categories = categories;
