@@ -20,11 +20,11 @@ public interface UserService {
 
     List<User> getUsers();
 
-    User findUserByFullName(String username);
+    User findUserByFullName(String fullName);
 
     User findUserByEmail(String email);
 
-    void deleteUser(String username) throws IOException;
+    void deleteUser(String fullName) throws IOException;
 
     void resetPassword(String email) throws EmailNotFoundException;
 }

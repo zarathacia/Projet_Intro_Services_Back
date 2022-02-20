@@ -13,6 +13,7 @@ import com.example.services.service.UserService;
 import com.example.services.utility.JWTTokenProvider;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,9 +42,9 @@ public class UserResource extends ExceptionHandling {
 
 
     @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody String email, @RequestBody  String password) {
-        authenticate(email, password);
-        User loginUser = userService.findUserByFullName(email);
+    public ResponseEntity<User> login(@RequestBody UserForm userForm) {
+        authenticate(userForm.getEmail(), userForm.getPassword());
+        User loginUser = userService.findUserByEmail(userForm.getEmail());
         UserPrincipal principal = new UserPrincipal(loginUser);
         HttpHeaders jwtHeader = getJwtHeader(principal);
         return ResponseEntity.ok().headers(jwtHeader).body(loginUser);
@@ -97,9 +98,9 @@ public class UserResource extends ExceptionHandling {
 		return response(OK, "Password changed successfully");
 	}
 
-    @DeleteMapping("/delete/{username}")
+    @DeleteMapping("/delete/{fullName}")
     @PreAuthorize("hasAuthority('user:delete')")
-    public ResponseEntity<Response> deleteUser(@PathVariable("username") String username) throws IOException {
+    public ResponseEntity<Response> deleteUser(@PathVariable("fullName") String username) throws IOException {
         userService.deleteUser(username);
         return response(OK, "User deleted successfully");
     }
@@ -120,3 +121,10 @@ public class UserResource extends ExceptionHandling {
     }
 
 }
+
+@Data
+class UserForm{
+    private String email;
+    private String password;
+}
+
