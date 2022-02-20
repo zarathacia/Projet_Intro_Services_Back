@@ -1,16 +1,12 @@
 package com.example.services.resource;
 
 import com.example.services.constant.SwaggerConfig;
-import com.example.services.exception.NotEnoughProductsInStockException;
+import com.example.services.model.CartItem;
 import com.example.services.model.Product;
-import com.example.services.repository.ProductRepo;
 import com.example.services.service.CartService;
-import com.example.services.service.ProductService;
 import com.example.services.service.implementation.ProductServiceImp;
-import com.example.services.service.implementation.CartServiceImp;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -55,21 +52,29 @@ public class CartResource {
      * }
      */
 
+    @GetMapping("/getById/{id}")
+    public ResponseEntity<Optional<CartItem>> getCartItem(@ApiParam(value = "id")@PathVariable("id") Long id){
+        return ResponseEntity.ok().body(cartService.getCartItem(id));
+    }
+
     @PostMapping("/Cart/addProduct/{productId}")
     public ResponseEntity<?> addProductToCart(@RequestBody ProductToCart form) {
         cartService.addProductToCart(form.getProduct());
         return ResponseEntity.ok().build();
     };
 
-    /*
-     * @GetMapping("/Cart/removeProduct/{productId}")
-     * public ModelAndView removeProductFromCart(@PathVariable("productId") Long
-     * productId) {
-     * getProduct(productId).ifPresent(cartService::removeProduct);
-     * return cart();
-     * }
-     * 
-     */
+
+      @GetMapping("/Cart/removeCartItem/{itemId}")
+      public ModelAndView removeItemFromCart(@PathVariable("itemId") Long
+      Id) {
+          if ((cartService.getProductsInCart()).get(getCartItem(Id)) == 1) {
+              (cartService.getProductsInCart()).remove(getCartItem(Id));
+          }
+          return cart();
+     // getCartItem(Id).ifPresent(cartService::removeCartItem);return cart();
+      }
+
+
 
     /*
      * @GetMapping("/Cart/checkout")

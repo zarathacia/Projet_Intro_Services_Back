@@ -18,7 +18,7 @@ public interface CartService {
 
     Map<Product, Integer> getCartItems();
 
-    // void checkout() throws NotEnoughProductsInStockException;
+    //void checkout() throws NotEnoughProductsInStockException;
 
     Optional<CartItem> getCartItem(Long id);
 
