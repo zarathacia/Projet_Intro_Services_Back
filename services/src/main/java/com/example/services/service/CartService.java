@@ -12,15 +12,16 @@ public interface CartService {
 
     void addProductToCart(Product product);
 
-    Map<Product, Integer> getProductsInCart();
 
-    void removeCartItem(CartItem cartItem);
+
+
+     void removeCartItem(Product cartItem);
 
     Map<Product, Integer> getCartItems();
 
-    //void checkout() throws NotEnoughProductsInStockException;
+    void checkout() throws NotEnoughProductsInStockException;
 
-    Optional<CartItem> getCartItem(Long id);
+    Optional<Product> getCartItem(Long id);
 
     BigDecimal getTotal();
 }

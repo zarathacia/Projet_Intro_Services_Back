@@ -18,12 +18,13 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/product")
 @RequiredArgsConstructor
 @Api(tags = {SwaggerConfig.API_TAG2})
-public class ProductSource {
+public class ProductResource {
     final ProductServiceImp productService;
 
     @ApiOperation(value = "Get all available products", notes = "Retrieve a list of all products", response = Product.class)
@@ -72,7 +73,7 @@ public class ProductSource {
             @ApiResponse(responseCode = "401", description = "You don't have permission to this resource")
     })
     @GetMapping("/getById/{id}")
-    public ResponseEntity<Product> getCategory(@ApiParam(value = "product id")@PathVariable("id") Long id){
+    public ResponseEntity<Optional<Product>> getCategory(@ApiParam(value = "product id")@PathVariable("id") Long id){
         return ResponseEntity.ok().body(productService.getProduct(id));
     }
 
