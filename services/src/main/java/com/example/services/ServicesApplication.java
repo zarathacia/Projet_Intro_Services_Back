@@ -1,5 +1,6 @@
 package com.example.services;
 
+import com.example.services.model.Cart;
 import com.example.services.model.Category;
 import com.example.services.model.Product;
 import com.example.services.model.Supplier;
@@ -67,6 +68,7 @@ public class ServicesApplication {
 
 			supplierService.saveSupplier(new Supplier( "ayyedi", new ArrayList<>()));
 			supplierService.addProductToSupplier("ayyedi","Zitouna");*/
+			cartservice.saveCart(new Cart());
 			//cartservice.addProductToCart(new Product("Zit","mdjfjdsb", new ArrayList<>(), 50L, new BigDecimal("1.5"),new ArrayList<>()));;
 			//cartservice.getTotal();
 			//cartservice.getCartItems();

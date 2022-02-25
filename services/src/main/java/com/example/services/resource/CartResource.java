@@ -3,6 +3,8 @@ package com.example.services.resource;
 import com.example.services.constant.SwaggerConfig;
 
 import com.example.services.exception.NotEnoughProductsInStockException;
+import com.example.services.model.Cart;
+import com.example.services.model.Category;
 import com.example.services.model.Product;
 import com.example.services.service.CartService;
 import com.example.services.service.ProductService;
@@ -13,16 +15,15 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/1")
 //@RequiredArgsConstructor
 @Api(tags = { SwaggerConfig.API_TAG4 })
 
@@ -35,6 +36,12 @@ public class CartResource {
     public CartResource(CartService cartService, ProductService productService) {
         this.cartService = cartService;
         this.productService = productService;
+    }
+
+    @PostMapping("/save")
+    public ResponseEntity<Cart> saveCart(@ApiParam(value = "Cart to be saved", required = true) @RequestBody Cart cart){
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/category/save").toUriString());
+        return ResponseEntity.created(uri).body(cartService.saveCart(cart));
     }
 
     @GetMapping("/Cart")
