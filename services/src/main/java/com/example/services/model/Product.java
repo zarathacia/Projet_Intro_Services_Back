@@ -18,12 +18,10 @@ public class Product {
     private Long id;
     private String name;
     private String description;
-
     private BigDecimal price;
     @ManyToMany
     private Collection<Category> categories = new ArrayList<>();
     private Long stock;
-
     @OneToMany(fetch = FetchType.EAGER)
     private Collection<Image> images = new ArrayList<>();
     @ManyToMany
@@ -38,9 +36,7 @@ public class Product {
         this.description = description;
         this.categories = categories;
         this.stock = stock;
-
         this.images = images;
-
         this.price = price;
     }
 }

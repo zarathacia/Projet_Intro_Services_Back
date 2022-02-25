@@ -33,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] PUBLIC_URLS = {
             "/v2/api-docs",
             "/swagger-resources/**",
+            "api/product/getall",
             "/swagger-ui/**",
             "/webjars/**",
             "/user/login", "/user/register",
@@ -51,13 +52,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().cors().and()
                 .sessionManagement().sessionCreationPolicy(STATELESS)
                 .and()
-                .authorizeRequests().antMatchers(PUBLIC_URLS).permitAll()
-                .anyRequest().authenticated()
+                .authorizeRequests().antMatchers(PUBLIC_URLS).permitAll();
+                /*.anyRequest().authenticated()
                 .and()
                 .exceptionHandling().accessDeniedHandler(jWTAccessDeniedHandler)
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .and()
-                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);*/
     }
     @Bean
     @Override

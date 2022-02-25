@@ -64,9 +64,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User register(String fullName, String email, String password)
+    public User register(String fullName, String email, String password, String confirmedPassword)
             throws EmailExistException, UsernameExistException, UserNotFoundException {
         validateNewFullNameAndEmail(EMPTY, fullName, email);
+        if(!password.equals(confirmedPassword)) throw new RuntimeException("Please confirm your password");
         User user = new User();
         String encodedPassword = encodePassword(password);
         user.setFullName(fullName);
@@ -175,14 +176,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     private User validateNewFullNameAndEmail(String currentFullName, String newFullName, String newEmail)
             throws UserNotFoundException, UsernameExistException, EmailExistException {
-        User userByNewUsername = findUserByFullName(newFullName);
+        User userByNewFullName = findUserByFullName(newFullName);
         User userByNewEmail = findUserByEmail(newEmail);
         if (StringUtils.isNotBlank(currentFullName)) {
             User currentUser = findUserByFullName(currentFullName);
             if (currentUser == null) {
                 throw new UserNotFoundException(USER_NOT_FOUND + currentFullName);
             }
-            if (userByNewUsername != null && !currentUser.getId().equals(userByNewUsername.getId())) {
+            if (userByNewFullName != null && !currentUser.getId().equals(userByNewFullName.getId())) {
                 throw new UsernameExistException(FULLNAME_EXISTS);
             }
             if (userByNewEmail != null && !currentUser.getId().equals(userByNewEmail.getId())) {
@@ -190,7 +191,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             }
             return currentUser;
         } else {
-            if (userByNewUsername != null) {
+            if (userByNewFullName != null) {
                 throw new UsernameExistException(FULLNAME_EXISTS);
             }
             if (userByNewEmail != null) {

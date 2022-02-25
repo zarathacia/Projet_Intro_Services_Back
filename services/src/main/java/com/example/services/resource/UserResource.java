@@ -51,8 +51,8 @@ public class UserResource extends ExceptionHandling {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody User user) throws UsernameExistException, EmailExistException, UserNotFoundException {
-        User newUser = userService.register(user.getFullName(), user.getEmail(), user.getPassword());
+    public ResponseEntity<User> register(@RequestBody RegisterForm registerForm) throws UsernameExistException, EmailExistException, UserNotFoundException {
+        User newUser = userService.register(registerForm.getFullName(), registerForm.getEmail(), registerForm.getPassword(), registerForm.getConfirmedPassword());
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/find/" + newUser.getFullName()).toUriString());
         return ResponseEntity.created(uri).body(newUser);
     }
@@ -128,3 +128,11 @@ class UserForm{
     private String password;
 }
 
+@Data
+class  RegisterForm{
+    private String fullName;
+    private String email;
+    private String password;
+    private String confirmedPassword;
+
+}

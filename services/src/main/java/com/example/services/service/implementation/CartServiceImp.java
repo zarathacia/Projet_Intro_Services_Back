@@ -42,9 +42,6 @@ public class CartServiceImp implements CartService {
     }
 
 
-
-
-
     @Override
     public void removeCartItem(Product cartItem) {
         if (cartItems.containsKey(cartItem)) {

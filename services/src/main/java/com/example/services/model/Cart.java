@@ -22,10 +22,8 @@ public class Cart {
     private int totalQuantity;
     private BigDecimal totalPrice;
     private String status;
-
     @CreationTimestamp
     private Date dateCreated;
-
     @UpdateTimestamp
     private Date lastUpdated;
     @OneToOne
@@ -43,7 +41,6 @@ public class Cart {
         }
     }*/
     @ManyToOne
-
     Product cartItem;
 
 }

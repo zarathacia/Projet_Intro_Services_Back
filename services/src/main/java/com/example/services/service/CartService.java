@@ -12,9 +12,6 @@ public interface CartService {
 
     void addProductToCart(Product product);
 
-
-
-
      void removeCartItem(Product cartItem);
 
     Map<Product, Integer> getCartItems();
