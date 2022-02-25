@@ -68,7 +68,7 @@ public class ServicesApplication {
 
 			supplierService.saveSupplier(new Supplier( "ayyedi", new ArrayList<>()));
 			supplierService.addProductToSupplier("ayyedi","Zitouna");*/
-			cartservice.saveCart(new Cart());
+			//cartservice.saveCart(new Cart());
 			//cartservice.addProductToCart(new Product("Zit","mdjfjdsb", new ArrayList<>(), 50L, new BigDecimal("1.5"),new ArrayList<>()));;
 			//cartservice.getTotal();
 			//cartservice.getCartItems();
