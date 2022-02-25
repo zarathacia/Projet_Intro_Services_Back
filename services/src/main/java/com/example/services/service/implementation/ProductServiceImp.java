@@ -1,8 +1,6 @@
 package com.example.services.service.implementation;
 
-import com.example.services.model.Image;
 import com.example.services.model.Product;
-import com.example.services.repository.ImageRepo;
 import com.example.services.repository.ProductRepo;
 import com.example.services.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +19,6 @@ import static java.lang.Boolean.TRUE;
 @Slf4j
 public class ProductServiceImp implements ProductService {
     final ProductRepo productRepo;
-    final ImageRepo imageRepo;
 
     @Override
     public Product saveProduct(Product product) {
@@ -29,12 +26,6 @@ public class ProductServiceImp implements ProductService {
         return productRepo.save(product);
 
     }
-
-    @Override
-    public Image saveImage(Image image) {
-        log.info("Saving new image {} to the database",image.getPath());
-        return imageRepo.save(image);    }
-
 
     @Override
     public List<Product> getProducts() {
@@ -51,15 +42,6 @@ public class ProductServiceImp implements ProductService {
     public Optional<Product> findById(Long id) {
         return productRepo.findById(id);
     }*/
-
-    @Override
-    public void addImageToProduct(String path, String productName) {
-        log.info("Adding image {} to product {}",path, productName);
-        Image image = imageRepo.findImageByPath(path);
-        Product product = productRepo.findByName(productName);
-        product.getImages().add(image);
-
-    }
 
     @Override
     public Product updateProduct(Product product) {

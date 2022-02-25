@@ -1,7 +1,6 @@
 package com.example.services.resource;
 
 import com.example.services.constant.SwaggerConfig;
-import com.example.services.model.Image;
 import com.example.services.model.Product;
 import com.example.services.model.Response;
 import com.example.services.service.implementation.ProductServiceImp;
@@ -58,11 +57,6 @@ public class ProductResource {
         return ResponseEntity.created(uri).body(productService.saveProduct(product));
     }
 
-    @PostMapping("/image/save")
-    public ResponseEntity<Image> saveRole(@RequestBody Image image){
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/1/image/save").toUriString());
-        return ResponseEntity.created(uri).body(productService.saveImage(image));
-    }
 
     @ApiOperation(value = "Find a product by its id", notes = "Retrieve a product by passing the product id", response = Product.class)
     @ApiResponses({@ApiResponse(responseCode = "200", description = "The product was retired successfully"),
@@ -107,17 +101,5 @@ public class ProductResource {
         return ResponseEntity.ok().body(updatedProduct);
     }
 
-    @PostMapping("/image/addtoproduct")
-    public ResponseEntity<?> addImageToProduct(@RequestBody ImageToCategory form){
-        productService.addImageToProduct(form.getPath(), form.getProductName());
-        return ResponseEntity.ok().build();
-    };
-
-}
-
-@Data
-class ImageToCategory{
-    private String path;
-    private String productName;
 }
 

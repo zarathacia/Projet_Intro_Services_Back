@@ -22,21 +22,18 @@ public class Product {
     @ManyToMany
     private Collection<Category> categories = new ArrayList<>();
     private Long stock;
-    @OneToMany(fetch = FetchType.EAGER)
-    private Collection<Image> images = new ArrayList<>();
+    private  String imageUrl;
     @ManyToMany
     private Collection<Supplier> suppliers = new ArrayList<>();
 
     public Product() {
     }
 
-    public Product(String name, String description, Collection<Category> categories, Long stock, BigDecimal price,
-            Collection<Image> images) {
+    public Product(String name, String description,BigDecimal price, Long stock,String imageUrl ) {
         this.name = name;
         this.description = description;
-        this.categories = categories;
         this.stock = stock;
-        this.images = images;
         this.price = price;
+        this.imageUrl = imageUrl;
     }
 }
