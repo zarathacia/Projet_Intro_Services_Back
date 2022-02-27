@@ -18,7 +18,8 @@ public class Product {
     private Long id;
     private String name;
     private String description;
-    private BigDecimal price;
+    private double price;
+
     @ManyToMany
     private Collection<Category> categories = new ArrayList<>();
     private Long stock;
@@ -29,11 +30,12 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, String description,BigDecimal price, Long stock,String imageUrl ) {
+    public Product(String name, String description,double price, Long stock,String imageUrl ) {
         this.name = name;
         this.description = description;
         this.stock = stock;
         this.price = price;
         this.imageUrl = imageUrl;
     }
+
 }

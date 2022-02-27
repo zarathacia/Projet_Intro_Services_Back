@@ -1,22 +1,28 @@
 package com.example.services.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
-
-import static javax.persistence.GenerationType.AUTO;
-
 @Entity
-
-public class CartItem /*extends Product*/ {
+@Table(name = "cart_item")
+@AllArgsConstructor
+@RequiredArgsConstructor
+@Data
+public class CartItem {
     @Id
-    @GeneratedValue(strategy = AUTO)
-    private Long id;
-    private Long quantity;
-    @OneToOne
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private  Long id;
+
+    @OneToOne(targetEntity = Product.class,cascade=CascadeType.ALL)
     private Product product;
-    @ManyToOne
-    private Cart cart;
+    private int quantity;
+
+    public CartItem(Product product, int quantity) {
+        this.product = product;
+        this.quantity = quantity;
 
 
+    }
 }

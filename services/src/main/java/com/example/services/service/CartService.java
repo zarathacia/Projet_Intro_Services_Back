@@ -1,4 +1,4 @@
-package com.example.services.service;
+/*package com.example.services.service;
 
 import com.example.services.exception.NotEnoughProductsInStockException;
 import com.example.services.model.CartItem;
@@ -21,4 +21,4 @@ public interface CartService {
     Optional<Product> getCartItem(Long id);
 
     BigDecimal getTotal();
-}
+}*/

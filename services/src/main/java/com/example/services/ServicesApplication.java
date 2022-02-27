@@ -1,9 +1,8 @@
 package com.example.services;
 
-import com.example.services.model.Category;
-import com.example.services.model.Product;
-import com.example.services.model.Supplier;
-import com.example.services.service.CartService;
+import com.example.services.model.*;
+
+import com.example.services.service.CartItemService;
 import com.example.services.service.CategoryService;
 import com.example.services.service.ProductService;
 import com.example.services.service.SupplierService;
@@ -50,12 +49,28 @@ public class ServicesApplication {
 		return new RequestContextListener();
 	}*/
 	@Bean
-	CommandLineRunner run(SupplierService supplierService, CartService cartservice, CategoryService categoryService, ProductService productService) {
+	CommandLineRunner run(SupplierService supplierService, Cart cart, CartItemService cartItemService, CategoryService categoryService, ProductService productService) {
 		return args -> {
-			/*productService.saveProduct(new Product("Zitouna","mdjfjbdsfbdsb", new ArrayList<>(), 50L, new BigDecimal("1.5"),new ArrayList<>()));
-			productService.saveProduct(new Product("sfarjel","mdjfjbdsfbdsb",new ArrayList<>(),100L,new BigDecimal("15"),new ArrayList<>()));
-			productService.saveProduct(new Product("bourdgen","mdjfjbdsfbdsb",new ArrayList<>(),150L,new BigDecimal("10"),new ArrayList<>()));
+			Product product1=new Product("sfarjel","mdjfjbdsfbdsb",10,100L,"hh");
+			Product product2=new Product("tout","mdjfjbdsfbdsb",10,2L,"hh");
+			CartItem cartItem1=new CartItem(product1,5);
+			//productService.saveProduct(product1);
 
+			//cart.addCartItem(new Product("tout","mdjfjbdsfbdsb",10,1,2L,"hh"));
+			//cart.addCartItem(cartItem1);
+			cart.addCartItem(new CartItem(new Product("karmous","mdjfjbdsfbdsb",10,100L,"hh"),1));
+			cart.getCartItems();
+			cart.calCartTotal();
+
+
+
+
+			//cartItemService.saveCartItem(new CartItem(new Product("sfarjl","mdjfjbdsfbdsb",10,2,100L,"hh"),5,5));
+			//cartItemService.saveCartItem(new CartItem(new Product("tout","mdjfjbdsfbdsb",10,2L,"hh"),5));			//productService.saveProduct(new Product("sfarjel","mdjfjbdsfbdsb",10,100L,"hh"));
+
+			//productService.saveProduct(new Product("sfarjel","mdjfjbdsfbdsb",10,1,100L,"hh"));
+			//productService.saveProduct(new Product("tout","mdjfjbdsfbdsb",10,1,2L,"hh"));
+/*
 
 
 			categoryService.saveCategory(new Category("arbre", new ArrayList<>()));
@@ -70,6 +85,7 @@ public class ServicesApplication {
 			//cartservice.addProductToCart(new Product("Zit","mdjfjdsb", new ArrayList<>(), 50L, new BigDecimal("1.5"),new ArrayList<>()));;
 			//cartservice.getTotal();
 			//cartservice.getCartItems();
+
 			/*
 			productService.addImageToProduct("hhhhh","Zitouna");
 			productService.addImageToProduct("ggggg","Zitouna");

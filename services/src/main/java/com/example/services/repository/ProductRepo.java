@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public interface ProductRepo extends JpaRepository<Product, Long> {
     Product findByName(String name);
-    Optional<Product> getById(Long id);
+    Product getById(Long id);
     //Page<Product> findByCategoryId(@Param("id") Long id, Pageable pageable);
    // Page<Product> findByNameContaining(@Param("name") String name, Pageable pageable);
 

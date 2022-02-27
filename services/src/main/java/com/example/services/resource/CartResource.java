@@ -1,31 +1,90 @@
 package com.example.services.resource;
 
 import com.example.services.constant.SwaggerConfig;
-
-import com.example.services.exception.NotEnoughProductsInStockException;
+import com.example.services.model.Cart;
+import com.example.services.model.CartItem;
 import com.example.services.model.Product;
-import com.example.services.service.CartService;
 import com.example.services.service.ProductService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiParam;
-import lombok.Data;
-
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.security.core.Authentication;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/cart")
 //@RequiredArgsConstructor
 @Api(tags = { SwaggerConfig.API_TAG4 })
+public class CartResource {
+    private ProductService productService;
 
+    private Cart cart;
+
+    @Autowired
+    public CartResource(Cart cart,ProductService productService) {
+        this.cart = cart; this.productService = productService;
+    }
+
+    @GetMapping
+    public String cartResource(Authentication authentication, Model model){
+//        if (authentication!=null){
+//            UserDetail userDetails = (UserDetail) authentication.getPrincipal();
+//            model.addAttribute("user",userDetails.getUser());
+//        }
+
+        List<CartItem> cartItems = cart.getCartItems();
+        if (cartItems.size()>0){
+            model.addAttribute("cartItems",cartItems);
+            model.addAttribute("total",cart.calCartTotal());
+        }
+        return "template/user/page/product/cart";
+
+    }
+    @GetMapping("getAll")
+    public List<CartItem> getAllCartItem(){
+        log.info("getAll Cart Items ->>"+cart.getCartItems().size());
+        return cart.getCartItems() ;
+    }
+
+    @GetMapping("/get")
+    public CartItem getCartItemByProductId(
+            @RequestParam(name = "productId", required = true) Long productId
+    ){
+        log.info("Get CartItem wit ProductId: "+productId);
+        Product product = productService.getProduct(productId);
+        CartItem item = new CartItem(
+                product,1
+        );
+        return item;
+    }
+
+    @PostMapping("/update")
+    public List<CartItem> updateCartItem(
+            HttpServletResponse response, HttpServletRequest request,
+            @RequestBody List<CartItem> cartItems
+    ){
+        log.info("update cart items with items number: "+cartItems.size());
+        if (cartItems!=null){
+            cart.clearCartItem();
+            cartItems.forEach(item->cart.addCartItem(item));
+        }else{
+            cart.clearCartItem();
+        }
+        return cart.getCartItems();
+    }
+
+
+
+
+}
+/*
 public class CartResource {
 
     private final CartService cartService;
@@ -67,7 +126,7 @@ public class CartResource {
         return ResponseEntity.ok().build();
     };*/
 
-
+/*
       @GetMapping("/Cart/removeCartItem/{itemId}")
       public ModelAndView removeCartItem(@PathVariable("itemId") Long
       Id) {
@@ -75,7 +134,7 @@ public class CartResource {
               (cartService.getProductsInCart()).remove(getCartItem(Id));
           }
           return cart();*/
-     productService.getProduct(Id).ifPresent(cartService::removeCartItem);
+   /*  productService.getProduct(Id).ifPresent(cartService::removeCartItem);
      return cart();
 
       }
@@ -99,4 +158,4 @@ public class CartResource {
 class ProductToCart {
     private Product product;
 
-}
+}*/

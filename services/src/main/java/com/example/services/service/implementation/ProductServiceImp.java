@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 import static java.lang.Boolean.TRUE;
 
@@ -34,7 +33,7 @@ public class ProductServiceImp implements ProductService {
     }
 
     @Override
-    public Optional<Product> getProduct(Long id) {
+    public Product getProduct(Long id) {
         log.info("Fetching products by {} ",id);
         return productRepo.getById(id);
     }

@@ -9,7 +9,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/product")
@@ -67,7 +65,7 @@ public class ProductResource {
             @ApiResponse(responseCode = "401", description = "You don't have permission to this resource")
     })
     @GetMapping("/getById/{id}")
-    public ResponseEntity<Optional<Product>> getCategory(@ApiParam(value = "product id")@PathVariable("id") Long id){
+    public ResponseEntity<Product> getCategory(@ApiParam(value = "product id")@PathVariable("id") Long id){
         return ResponseEntity.ok().body(productService.getProduct(id));
     }
 
