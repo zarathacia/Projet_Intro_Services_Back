@@ -1,7 +1,9 @@
 /*package com.example.services.service.implementation;
 
 import com.example.services.exception.NotEnoughProductsInStockException;
+import com.example.services.model.Cart;
 import com.example.services.model.Product;
+import com.example.services.repository.CartRepo;
 import com.example.services.repository.ProductRepo;
 import com.example.services.service.CartService;
 import lombok.AllArgsConstructor;
@@ -26,10 +28,15 @@ import java.util.Optional;
 public class CartServiceImp implements CartService {
 
     private final ProductRepo productRepo;
-    //private final CartItemRepo cartItemRepo;
+    private final CartRepo cartRepo;
 
     private Map<Product, Integer> cartItems = new HashMap<Product, Integer>();
     // private Map<Product, Integer> products = new HashMap<>();
+
+    @Override
+    public Cart saveCart(Cart cart) {
+        return cartRepo.save(cart);
+    }
 
     @Override
     public void addProductToCart(Product product) {
