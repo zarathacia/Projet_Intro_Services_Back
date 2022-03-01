@@ -10,5 +10,6 @@ public interface CartItemService {
     List<CartItem> getCartItems();
     CartItem addCartItem(CartItem cartItem);
     Boolean deleteCartItem(Long id);
-    //CartItem  updateCartItem(CartItem cartItem);
+    CartItem  updateCartItem(CartItem cartItem);
+    double getTotal();
 }

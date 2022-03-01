@@ -3,8 +3,6 @@ package com.example.services.model;
 import com.example.services.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.GeneratedValue;
@@ -40,7 +38,7 @@ public class Cart {
         System.out.println("add done???");
 
     }
-    public void updateCartItem(CartItem cartItem){
+    public CartItem updateCartItem(CartItem cartItem){
         log.info("update Item in cart");
         int duplicate = 0;
         for (CartItem item: cartItems) {
@@ -56,6 +54,7 @@ public class Cart {
         if (duplicate == 0){
             addCartItem(cartItem);
         }
+        return cartItem;
     }
     public void removeCartItem(CartItem cartItem){
         log.info("remove Item in cart");

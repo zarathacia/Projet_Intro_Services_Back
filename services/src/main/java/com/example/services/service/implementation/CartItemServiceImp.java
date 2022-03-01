@@ -30,11 +30,24 @@ public class CartItemServiceImp implements CartItemService {
     }
 
     @Override
+    public CartItem updateCartItem(CartItem cartItem) {
+        log.info("Updating product : {}", cartItem.getProduct().getName());
+        return cartItemRepo.save(cartItem);
+    }
+
+    @Override
+    public double getTotal() {
+        return cart.calCartTotal();
+    }
+
+    @Override
     public List<CartItem> getCartItems() {
         log.info("Fetching all products ");
         return cartItemRepo.findAll();
 
     }
+    /*@Override
+    public */
 
 
     @Override

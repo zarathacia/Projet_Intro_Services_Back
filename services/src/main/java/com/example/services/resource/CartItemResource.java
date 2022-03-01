@@ -42,6 +42,16 @@ public class CartItemResource {
     public ResponseEntity<List<CartItem>> getCartItems(){
         return ResponseEntity.ok().body(cart.getCartItems());
     }
+    @PutMapping("/update")
+    public ResponseEntity<CartItem> updateCartItem(@ApiParam(value = "cartItem object in Json format")@RequestBody CartItem cartItem) {
+        CartItem updatedCartItem = cartItemService.updateCartItem(cartItem);
+        return ResponseEntity.ok().body(updatedCartItem);
+    }
+    @GetMapping("/getTotal")
+    public ResponseEntity<Double> getTotal() {
+
+        return ResponseEntity.ok().body(cart.calCartTotal());
+    }
 }/*
 @Data
 class ProductToCartItem{
