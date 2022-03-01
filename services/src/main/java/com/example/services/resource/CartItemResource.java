@@ -1,10 +1,12 @@
 package com.example.services.resource;
 
+import com.example.services.constant.SwaggerConfig;
 import com.example.services.model.Cart;
 import com.example.services.model.CartItem;
 import com.example.services.model.Product;
 import com.example.services.model.Response;
 import com.example.services.service.implementation.CartItemServiceImp;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -16,8 +18,9 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/cart_item")
+@RequestMapping("/api/CartItem")
 @RequiredArgsConstructor
+@Api(tags = {SwaggerConfig.API_TAG6})
 public class CartItemResource {
     final CartItemServiceImp cartItemService;
     final Cart cart;

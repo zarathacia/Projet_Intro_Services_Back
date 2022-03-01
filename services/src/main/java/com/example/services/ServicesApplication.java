@@ -62,8 +62,8 @@ public class ServicesApplication {
 			cart.addCartItem(new CartItem(new Product("karmous","mdjfjbdsfbdsb",10,100L,"hh"),1));
 			cart.addCartItem(cartItem1);
 			cartItemService.addCartItem(cartItem1);
-            cart.getCartItems();
-			cart.calCartTotal();
+            //cart.getCartItems();
+			cartItemService.getTotal();
 
 
 
