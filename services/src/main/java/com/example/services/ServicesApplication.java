@@ -65,7 +65,7 @@ public class ServicesApplication {
 
 
 
-			//cartItemService.saveCartItem(new CartItem(new Product("sfarjl","mdjfjbdsfbdsb",10,2,100L,"hh"),5,5));
+			cartItemService.saveCartItem(cartItem1);
 			//cartItemService.saveCartItem(new CartItem(new Product("tout","mdjfjbdsfbdsb",10,2L,"hh"),5));			//productService.saveProduct(new Product("sfarjel","mdjfjbdsfbdsb",10,100L,"hh"));
 
 			//productService.saveProduct(new Product("sfarjel","mdjfjbdsfbdsb",10,1,100L,"hh"));
