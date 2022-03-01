@@ -6,16 +6,21 @@ import com.example.services.model.CartItem;
 import com.example.services.model.Product;
 import com.example.services.service.ProductService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URI;
 import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 @Slf4j
 
 @RestController
@@ -32,12 +37,8 @@ public class CartResource {
         this.cart = cart; this.productService = productService;
     }
 
-    @GetMapping
-    public String cartResource(Authentication authentication, Model model){
-//        if (authentication!=null){
-//            UserDetail userDetails = (UserDetail) authentication.getPrincipal();
-//            model.addAttribute("user",userDetails.getUser());
-//        }
+    /*@GetMapping
+    public String cartResource(Model model){
 
         List<CartItem> cartItems = cart.getCartItems();
         if (cartItems.size()>0){
@@ -46,12 +47,14 @@ public class CartResource {
         }
         return "template/user/page/product/cart";
 
-    }
+    }*/
     @GetMapping("getAll")
     public List<CartItem> getAllCartItem(){
         log.info("getAll Cart Items ->>"+cart.getCartItems().size());
         return cart.getCartItems() ;
     }
+   // @PostMapping
+
 
     @GetMapping("/get")
     public CartItem getCartItemByProductId(
@@ -59,9 +62,7 @@ public class CartResource {
     ){
         log.info("Get CartItem wit ProductId: "+productId);
         Product product = productService.getProduct(productId);
-        CartItem item = new CartItem(
-                product,1
-        );
+        CartItem item = new CartItem(product,1);
         return item;
     }
 
@@ -94,37 +95,17 @@ public class CartResource {
     public CartResource(CartService cartService, ProductService productService) {
         this.cartService = cartService;
         this.productService = productService;
-    }
-
-    @GetMapping("/Cart")
-    public ModelAndView cart() {
-        ModelAndView modelAndView = new ModelAndView("/Cart");
-        modelAndView.addObject("products", cartService.getCartItems());
-        modelAndView.addObject("total", cartService.getTotal().toString());
-        return modelAndView;
-    }
+    }*/
 
 
-    @GetMapping("/Cart/addProduct/{productId}")
-      public ModelAndView addProductToCart(@PathVariable("Id") Long
-      Id) {
-
-      productService.getProduct(Id).ifPresent(cartService::addProductToCart);
-
-      return cart();
-      }
 
 
-    @GetMapping("/getById/{id}")
+   /*@GetMapping("/getById/{id}")
     public ResponseEntity<Optional<Product>> getCartItem(@ApiParam(value = "id")@PathVariable("id") Long id){
         return ResponseEntity.ok().body(cartService.getCartItem(id));
-    }
+    }*/
 
-    /*@PostMapping("/Cart/addProduct/{productId}")
-    public ResponseEntity<?> addProductToCart(@RequestBody ProductToCart form) {
-        cartService.addProductToCart(form.getProduct());
-        return ResponseEntity.ok().build();
-    };*/
+
 
 /*
       @GetMapping("/Cart/removeCartItem/{itemId}")

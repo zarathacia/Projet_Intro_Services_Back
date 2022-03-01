@@ -54,18 +54,22 @@ public class ServicesApplication {
 			Product product1=new Product("sfarjel","mdjfjbdsfbdsb",10,100L,"hh");
 			Product product2=new Product("tout","mdjfjbdsfbdsb",10,2L,"hh");
 			CartItem cartItem1=new CartItem(product1,5);
+			CartItem cartItem2=new CartItem(product2,4);
 			//productService.saveProduct(product1);
 
 			//cart.addCartItem(new Product("tout","mdjfjbdsfbdsb",10,1,2L,"hh"));
 			//cart.addCartItem(cartItem1);
 			cart.addCartItem(new CartItem(new Product("karmous","mdjfjbdsfbdsb",10,100L,"hh"),1));
-			cart.getCartItems();
+			cart.addCartItem(cartItem1);
+			cartItemService.addCartItem(cartItem1);
+            cart.getCartItems();
 			cart.calCartTotal();
 
 
 
 
-			cartItemService.saveCartItem(cartItem1);
+
+           // cart.updateCartItem();
 			//cartItemService.saveCartItem(new CartItem(new Product("tout","mdjfjbdsfbdsb",10,2L,"hh"),5));			//productService.saveProduct(new Product("sfarjel","mdjfjbdsfbdsb",10,100L,"hh"));
 
 			//productService.saveProduct(new Product("sfarjel","mdjfjbdsfbdsb",10,1,100L,"hh"));

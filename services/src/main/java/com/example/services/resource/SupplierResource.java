@@ -1,6 +1,7 @@
 package com.example.services.resource;
 
 import com.example.services.constant.SwaggerConfig;
+import com.example.services.model.Product;
 import com.example.services.model.Response;
 import com.example.services.model.Supplier;
 import com.example.services.service.implementation.SupplierServiceImp;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -38,6 +41,11 @@ public class SupplierResource {final private SupplierServiceImp supplierService;
                     ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/supplier/save").toUriString());
             return ResponseEntity.created(uri).body(supplierService.saveSupplier(supplier));
         }
+    @GetMapping("/supplier/getall")
+    public ResponseEntity<List<Supplier>> getSuppliers(){
+        return ResponseEntity.ok().body(supplierService.getSuppliers());
+    }
+
 
     @ApiOperation(value = "Find a supplier by its id", notes = "Retrieve a supplier by passing the supplier id", response = Supplier.class)
         @ApiResponses({ @ApiResponse(responseCode = "200", description = "The list of suppliers retrieved"),
@@ -52,7 +60,7 @@ public class SupplierResource {final private SupplierServiceImp supplierService;
                 @ApiResponse(responseCode = "500", description = "An internal server error occurred"),
                 @ApiResponse(responseCode = "403", description = "You are not authorized. Please authenticate and try again"),
                 @ApiResponse(responseCode = "401", description = "You don't have permission to this resource") })
-        @GetMapping("getBySupplier/{id}")
+        @GetMapping("/supplier/getBySupplier/{id}")
         public ResponseEntity<Supplier> getSupplier(@ApiParam(value = "supplier id") @PathVariable("id") Long id) {
             return ResponseEntity.ok().body(supplierService.getSupplier(id));
         }

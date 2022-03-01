@@ -10,5 +10,6 @@ public interface ProductService {
     Product getProduct(Long id);
     //Optional<Product> findById(Long id);
     Product updateProduct(Product server);
+
     Boolean deleteProduct(Long id);
 }
