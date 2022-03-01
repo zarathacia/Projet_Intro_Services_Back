@@ -41,6 +41,23 @@ public class CartItemServiceImp implements CartItemService {
     }
 
     @Override
+    public void removeCartItem(CartItem cartItem) {
+        {
+            log.info("remove Item in cart");
+            int deleteIndex = -1;
+            for (int i = 0; i <cart.getCartItems().size() ; i++) {
+                if (cart.getCartItems().get(i).getId()== cartItem.getId()){
+                    deleteIndex = i;
+                    break;
+                }
+            }
+            if (deleteIndex != -1){
+                cart.getCartItems().remove(deleteIndex);
+            }
+        }
+    }
+
+    @Override
     public List<CartItem> getCartItems() {
         log.info("Fetching all products ");
         return cartItemRepo.findAll();
@@ -49,7 +66,7 @@ public class CartItemServiceImp implements CartItemService {
 
     @Override
     public CartItem addCartItem(CartItem cartItem) {
-        log.info("Saving new product {} to the database",cartItem.getProduct());
+        log.info("Saving new cart item {} to the database",cartItem.getProduct());
         log.info("add Item to cart with productId: "+cartItem.getId()+", qty: "+cartItem.getQuantity()+", total: "+cartItem.getProduct().getPrice());
         Double price = cartItem.getProduct().getPrice();
         cartItem.getProduct().setPrice(cartItem.getQuantity() * price);

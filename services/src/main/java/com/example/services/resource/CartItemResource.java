@@ -41,6 +41,11 @@ public class CartItemResource {
         return ResponseEntity.ok().build();
 
     }
+    @PostMapping("/remove")
+    public ResponseEntity<Response> removeCartItem(@ApiParam(value = "cart_item ")@RequestBody CartItem cartItem) {
+        cartItemService.removeCartItem(cartItem);
+        return ResponseEntity.ok().build();
+    }
     @GetMapping("/getall")
     public ResponseEntity<List<CartItem>> getCartItems(){
         return ResponseEntity.ok().body(cart.getCartItems());

@@ -53,17 +53,20 @@ public class ServicesApplication {
 		return args -> {
 			Product product1=new Product("sfarjel","mdjfjbdsfbdsb",10,100L,"hh");
 			Product product2=new Product("tout","mdjfjbdsfbdsb",10,2L,"hh");
+			Product product3=new Product("7chich","mdjfjbdsfbdsb",20,2L,"5hh");
 			CartItem cartItem1=new CartItem(product1,5);
 			CartItem cartItem2=new CartItem(product2,4);
+			CartItem cartItem3=new CartItem(product3,2);
 			//productService.saveProduct(product1);
 
 			//cart.addCartItem(new Product("tout","mdjfjbdsfbdsb",10,1,2L,"hh"));
 			//cart.addCartItem(cartItem1);
-			cart.addCartItem(new CartItem(new Product("karmous","mdjfjbdsfbdsb",10,100L,"hh"),1));
-			cart.addCartItem(cartItem1);
-			cartItemService.addCartItem(cartItem1);
+			//cart.addCartItem(new CartItem(new Product("karmous","mdjfjbdsfbdsb",10,100L,"hh"),1));
+			//cart.addCartItem(cartItem1);
+			cartItemService.addCartItem(cartItem3);
+			//cartItemService.removeCartItem(cartItem3);
             //cart.getCartItems();
-			cartItemService.getTotal();
+			//cartItemService.getCartItems();
 
 
 

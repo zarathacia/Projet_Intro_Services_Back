@@ -23,6 +23,11 @@ public class Supplier {
     private String email;
     private String phoneNumber;
     private String address;
+    private String suppliertype;
+    private String location;
+    private boolean delivery;
+    private String bio;
+    private String imageUrl;
     @ManyToMany
     private Collection<Product> products = new ArrayList<>();
     public Supplier() {}
@@ -30,7 +35,7 @@ public class Supplier {
     public Supplier(String supplierName, Collection<Product> products) {
         this.supplierName = supplierName;
         this.products = products;
-    }
+     }
 
     public Long getId() {
         return id;

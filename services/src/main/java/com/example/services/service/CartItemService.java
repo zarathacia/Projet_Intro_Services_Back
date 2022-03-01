@@ -12,4 +12,5 @@ public interface CartItemService {
     Boolean deleteCartItem(Long id);
     CartItem  updateCartItem(CartItem cartItem);
     double getTotal();
+    public void removeCartItem(CartItem cartItem);
 }
