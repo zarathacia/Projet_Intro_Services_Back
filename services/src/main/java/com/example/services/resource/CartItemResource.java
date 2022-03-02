@@ -48,7 +48,7 @@ public class CartItemResource {
     }
     @GetMapping("/getall")
     public ResponseEntity<List<CartItem>> getCartItems(){
-        return ResponseEntity.ok().body(cart.getCartItems());
+        return ResponseEntity.ok().body(cartItemService.getCartItems());
     }
     @PutMapping("/update")
     public ResponseEntity<CartItem> updateCartItem(@ApiParam(value = "cartItem object in Json format")@RequestBody CartItem cartItem) {
