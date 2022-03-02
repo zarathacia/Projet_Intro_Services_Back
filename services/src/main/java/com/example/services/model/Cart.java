@@ -31,7 +31,7 @@ public class Cart {
     public void addCartItem(CartItem cartItem){
         log.info("add Item to cart with prouctId: "+cartItem.getId()+", qty: "+cartItem.getQuantity()+", total: "+cartItem.getProduct().getPrice());
         Double price = cartItem.getProduct().getPrice();
-        cartItem.getProduct().setPrice(cartItem.getQuantity() * price);
+        cartItem.setTotalPrice(cartItem.getQuantity() * price);
 
         this.cartItems.add(cartItem);
         //this.cartItems.saveAll();
@@ -77,7 +77,7 @@ public class Cart {
     }
     public Double calCartTotal(){
         log.info("get total price Item to cart");
-        this.cartTotal = cartItems.stream().mapToDouble(p->p.getProduct().getPrice()).sum();
+        this.cartTotal = cartItems.stream().mapToDouble(p->p.getTotalPrice()).sum();
         System.out.println(this.cartTotal);
         return this.cartTotal;
     }

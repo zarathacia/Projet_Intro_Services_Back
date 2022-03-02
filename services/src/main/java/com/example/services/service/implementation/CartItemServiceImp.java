@@ -37,7 +37,11 @@ public class CartItemServiceImp implements CartItemService {
 
     @Override
     public double getTotal() {
-        return cart.calCartTotal();
+        log.info("get total price Item to cart");
+        
+        System.out.println(getCartItems().stream().mapToDouble(p->p.getTotalPrice()).sum());
+
+        return getCartItems().stream().mapToDouble(p->p.getTotalPrice()).sum();
     }
 
     @Override
@@ -69,7 +73,7 @@ public class CartItemServiceImp implements CartItemService {
         log.info("Saving new cart item {} to the database",cartItem.getProduct());
         log.info("add Item to cart with productId: "+cartItem.getId()+", qty: "+cartItem.getQuantity()+", total: "+cartItem.getProduct().getPrice());
         Double price = cartItem.getProduct().getPrice();
-        cartItem.getProduct().setPrice(cartItem.getQuantity() * price);
+        cartItem.setTotalPrice(cartItem.getQuantity() * price);
         System.out.println("add done???");
         cart.getCartItems().add(cartItem);
         return cartItemRepo.save(cartItem);

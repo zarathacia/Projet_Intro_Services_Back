@@ -25,16 +25,25 @@ public class Supplier {
     private String address;
     private String suppliertype;
     private String location;
-    private boolean delivery;
+    private String delivery;
     private String bio;
     private String imageUrl;
     @ManyToMany
     private Collection<Product> products = new ArrayList<>();
     public Supplier() {}
 
-    public Supplier(String supplierName, Collection<Product> products) {
+    public Supplier(String supplierName, Collection<Product> products, String email,
+    String phoneNumber, String address, String suppliertype, String location,String delivery, String bio, String imageUrl) {
         this.supplierName = supplierName;
         this.products = products;
+        this.email=email;
+        this.phoneNumber=phoneNumber;
+        this.address=address;
+        this.suppliertype=suppliertype;
+        this.location=location;
+        this.delivery=delivery;
+        this.bio=bio;
+        this.imageUrl=imageUrl;
      }
 
     public Long getId() {

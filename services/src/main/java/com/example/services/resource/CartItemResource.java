@@ -58,7 +58,7 @@ public class CartItemResource {
     @GetMapping("/getTotal")
     public ResponseEntity<Double> getTotal() {
 
-        return ResponseEntity.ok().body(cart.calCartTotal());
+        return ResponseEntity.ok().body(cartItemService.getTotal());
     }
 }/*
 @Data

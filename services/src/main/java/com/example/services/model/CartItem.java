@@ -18,6 +18,7 @@ public class CartItem {
     @OneToOne(targetEntity = Product.class,cascade=CascadeType.ALL)
     private Product product;
     private int quantity;
+    private double TotalPrice;
 
     public CartItem(Product product, int quantity) {
         this.product = product;
