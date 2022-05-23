@@ -1,4 +1,2 @@
 # Projet_Intro_Services
-
-hello
-jihed's token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJhdWQiOiJVc2VyIE1hbmFnZW1lbnQgUG9ydGFsIiwic3ViIjoiMTUiLCJpc3MiOiJHZXQgQXJyYXlzLCBMTEMuIiwiZXhwIjoxNjQ1MjAxMjk5LCJpYXQiOjE2NDQ3NjkyOTksImF1dGhvcml0aWVzIjpbInVzZXI6cmVhZCIsInVzZXI6Y3JlYXRlIiwidXNlcjp1cGRhdGUiXX0.UMAXfGQEOU8rdjlKA_T-chONq9cATYB6PQ_YNtqww5tXcScmZ4ep9tvGSQMGoXRzoUcuvt7BSHusF8IahRraAQ
+This project is a web api made using spring boot in order to be consumed by the front_end analytics dashboard : https://github.com/zarathacia/Projet_Intro_Services_Apps
